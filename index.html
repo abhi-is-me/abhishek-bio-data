@@ -33,8 +33,28 @@
       margin: 10px auto;
       transition: transform 0.3s ease;
     }
+
     .zoomed {
-      transform: scale(4);
+      transform: scale(2);
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(5);
+      z-index: 1000;
+      border-radius: 50%; /* Optional: Square during zoom */
+    }
+
+    .floating-zoom-in-btn {
+      display: none;
+      position: fixed;
+      bottom: 90px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1001;
+    }
+
+    .floating-zoom-in-btn.show {
+      display: block;
     }
 </style>
 </head>
@@ -45,9 +65,10 @@
 
     <!-- Zoom Button -->
     <div class="text-center mb-3">
-      <button class="btn btn-sm btn-danger" onclick="zoomImage()">Zoom Image</button>
+      <button class="btn btn-sm btn-danger" onclick="zoomOut()">Zoom In</button>
     </div>
-
+    <!-- Floating Zoom In Button -->
+    <button id="zoomInBtn" class="btn btn-danger floating-zoom-in-btn" onclick="zoomIn()">Zoom Out</button>
      <table class="table table-borderless info-table">      <tbody>        <tr><td><strong>Name</strong></td><td>: Abhishek Kumar</td></tr>        <tr><td><strong>Date of Birth</strong></td><td>: 13th of Nov 1996</td></tr>
       <tr><td><strong>Place of Birth</strong></td><td>: Bihta</td></tr>
       <tr><td><strong>Time of Birth</strong></td><td>: 11:30 AM</td></tr>
@@ -59,6 +80,7 @@
       <tr><td><strong>Education</strong></td><td>: B.Tech (CSE)</td></tr>
       <tr><td><strong>Occupation</strong></td><td>: Software Engineer</td></tr>        
       <tr><td><strong>Company</strong></td><td>: <a style="text-decoration:none" href="https://www.nagarro.com/en/company" target="_blank">Nagarro</a></td></tr>
+      <tr><td><strong>Role</strong></td><td>: Developer</td></tr>   
     </tbody>
   </table>
   <div class="section-title">FAMILY DETAILS</div>
@@ -70,8 +92,16 @@
       <tr><td><strong>Brother</strong></td><td>: Vivek Kumar</td></tr>        
     </tbody>    </table>    <div class="section-title">CONTACT DETAILS</div>    <table class="table table-borderless info-table">      <tbody>        <tr><td><strong>Address</strong></td><td>: Chiraura Naubatpur, Patna - 801109</td></tr>        <tr><td><strong>Contact No.</strong></td><td>: 8434437681</td></tr>      </tbody>    </table>  </div>
   <script>
-    function zoomImage() {
-      const image = document.getElementById('profileImage');
-      image.classList.toggle('zoomed');
+   const image = document.getElementById('profileImage');
+    const zoomInBtn = document.getElementById('zoomInBtn');
+
+    function zoomOut() {
+      image.classList.add('zoomed');
+      zoomInBtn.classList.add('show');
+    }
+
+    function zoomIn() {
+      image.classList.remove('zoomed');
+      zoomInBtn.classList.remove('show');
     }
   </script></body></html>
